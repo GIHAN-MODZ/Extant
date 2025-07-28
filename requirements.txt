@@ -3,4 +3,3 @@ flask-cors
 pillow
 pytesseract
 tesseract
-apt-get update && apt-get install -y tesseract-ocr
