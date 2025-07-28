@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💀 Hacker Terminal OCR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+      margin-bottom: 20px;
+    }
+    
+    .disclaimer {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  background: rgba(0,0,0,0.9);
+  color: #ff5555;
+  border: 1px solid #ff5555;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: monospace;
+  box-shadow: 0 0 10px #ff0000;
+  z-index: 9999;
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.icon {
+  font-size: 20px;
+  margin-bottom: 5px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+    
+    
+    
+
+    #terminal {
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid #00ff00;
+      padding: 15px;
+      height: 350px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      box-shadow: 0 0 10px #00ff00;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    input[type="file"], button {
+      width: 100%;
+      background-color: black;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+      color: #00ff00;
+      background: #000;
+      border: 1px solid #00ff00;
+      border-radius: 3px;
+    }
+
+    .blink {
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes scrollText {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+    }
+
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg, #001100 0px, #001100 2px, transparent 2px, transparent 4px);
+      opacity: 0.1;
+      animation: scrollText 10s linear infinite;
+    }
+
+    @media (max-width: 600px) {
+      #terminal {
+        height: 250px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="matrix-bg"></div>
+
+  <h1>ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ!</h1>
+  <div id="terminal">[SRI LANKA] ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ... <span class="blink">█</span></div>
+
+  <input type="file" id="fileInput">
+  <button onclick="upload()">UPLOAD IMG</button>
+
+  <script>
+    function typeOut(text) {
+      const terminal = document.getElementById('terminal');
+      terminal.innerHTML = '';
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          terminal.innerHTML += text[i++];
+          terminal.scrollTop = terminal.scrollHeight;
+          setTimeout(typing, 8);
+        } else {
+          terminal.innerHTML += "\n\n[✓ Complete] <span class='blink'>█</span>";
+        }
+      }
+      typing();
+    }
+
+    function upload() {
+      const file = document.getElementById("fileInput").files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+
+      typeOut("[*] Uploading image...\n");
+
+      fetch("/upload", {
+          method: "POST",
+          body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+          typeOut("[+] Extracted Text:\n\n" + data.extracted_text);
+      })
+      .catch(() => {
+          typeOut("[!] Error: Failed to process image.");
+      });
+    }
+  </script>
+  
+  <script>
+const disclaimerText = `මෙම මෙවලම නිර්මාණය කර ඇත්තේ අධ්‍යාපනික, පරීක්ෂණමය, සහ පෞද්ගලික උපාංග පරීක්ෂාව සඳහා පමණි. 
+ඔබට අයිතියක් නොමැති වෙනත් උපාංග නිරීක්ෂණය කිරීම හෝ දත්ත ලබා ගෑනිම සඳහා මෙය භාවිතා නොකරන්න — එවැනි ක්‍රියාවන් ණිති විරොදි 
+මෙම මෙවලම හැමවිටම වගකීමෙන් හා නීතිමය ලෙස භාවිතා කරන්න`;
+
+function typeDisclaimer(text, elementId, speed = 20) {
+  const element = document.getElementById(elementId);
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text[i++];
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+// Trigger typing after delay
+setTimeout(() => {
+  typeDisclaimer(disclaimerText, 'disclaimer-text', 15);
+}, 1500);
+</script>
+
+
+
+</body>
+</html>
