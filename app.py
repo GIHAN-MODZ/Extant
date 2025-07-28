@@ -4,6 +4,7 @@ import pytesseract
 from flask_cors import CORS
 
 # ⚠️ අයින් කරලා තියෙන්නෙ Run Termux නම් ඇඩ් කරපන් 
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 app = Flask(__name__)
 CORS(app)
