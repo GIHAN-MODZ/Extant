@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>💀 Hacker Terminal OCR</title>
+  <title>GIHAN OCR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* Reset */
@@ -26,44 +26,41 @@
       text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
       margin-bottom: 20px;
     }
-    
+
     .disclaimer {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: 300px;
-  background: rgba(0,0,0,0.9);
-  color: #ff5555;
-  border: 1px solid #ff5555;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-family: monospace;
-  box-shadow: 0 0 10px #ff0000;
-  z-index: 9999;
-  opacity: 0;
-  animation: fadeIn 2s ease-in-out forwards;
-}
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 300px;
+      background: rgba(0,0,0,0.9);
+      color: #ff5555;
+      border: 1px solid #ff5555;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: monospace;
+      box-shadow: 0 0 10px #ff0000;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
 
-.icon {
-  font-size: 20px;
-  margin-bottom: 5px;
-  animation: pulse 1s infinite;
-}
+    .icon {
+      font-size: 20px;
+      margin-bottom: 5px;
+      animation: pulse 1s infinite;
+    }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(100%); }
-  to { opacity: 1; transform: translateX(0); }
-}
-    
-    
-    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
     #terminal {
       background: rgba(0, 0, 0, 0.9);
@@ -133,8 +130,15 @@
   <div class="matrix-bg"></div>
 
   <h1>ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ!</h1>
-  <div id="terminal">[SRI LANKA] ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ... <span class="blink">█</span></div>
 
+  <div id="terminal">[Terminal] ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ... <span class="blink">█</span></div>
+
+  <!-- ✅ COPY BUTTON -->
+  <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+    <button onclick="copyText()">COPY TEXT</button>
+  </div>
+
+  <!-- ✅ FILE INPUT + UPLOAD BUTTON -->
   <input type="file" id="fileInput">
   <button onclick="upload()">UPLOAD IMG</button>
 
@@ -174,32 +178,46 @@
           typeOut("[!] Error: Failed to process image.");
       });
     }
-  </script>
-  
-  <script>
-const disclaimerText = `මෙම මෙවලම නිර්මාණය කර ඇත්තේ අධ්‍යාපනික, පරීක්ෂණමය, සහ පෞද්ගලික උපාංග පරීක්ෂාව සඳහා පමණි. 
-ඔබට අයිතියක් නොමැති වෙනත් උපාංග නිරීක්ෂණය කිරීම හෝ දත්ත ලබා ගෑනිම සඳහා මෙය භාවිතා නොකරන්න — එවැනි ක්‍රියාවන් ණිති විරොදි 
-මෙම මෙවලම හැමවිටම වගකීමෙන් හා නීතිමය ලෙස භාවිතා කරන්න`;
 
-function typeDisclaimer(text, elementId, speed = 20) {
-  const element = document.getElementById(elementId);
-  let i = 0;
-  function typing() {
-    if (i < text.length) {
-      element.innerHTML += text[i++];
-      setTimeout(typing, speed);
+    // ✅ COPY FUNCTION
+    function copyText() {
+      const terminal = document.getElementById('terminal');
+      const temp = document.createElement("textarea");
+      temp.value = terminal.innerText.replace("█", "").replace("[✓ Complete]", "").trim();
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+      alert("Text copied to clipboard ! \n \n │ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ!");
     }
-  }
-  typing();
-}
+  </script>
 
-// Trigger typing after delay
-setTimeout(() => {
-  typeDisclaimer(disclaimerText, 'disclaimer-text', 15);
-}, 1500);
-</script>
+  <!-- ✅ DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="icon"> <h6>⚠️ │ꜱʟ×ʙʟᴀᴄᴋ ꜱʜᴀᴅᴏᴡ ᴍᴏᴅᴢ ᴄʏʙᴇʀ ɢɪʜᴀɴ ᴠɪᴘ</h6> </div>
+    <div id="disclaimer-text"></div>
+  </div>
 
+  <script>
+    const disclaimerText = `මෙම මෙවලම නිර්මාණය කර ඇත්තේ අධ්‍යාපනික, පරීක්ෂණමය, සදහා පමණි `;
+    
 
+    function typeDisclaimer(text, elementId, speed = 20) {
+      const element = document.getElementById(elementId);
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text[i++];
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    setTimeout(() => {
+      typeDisclaimer(disclaimerText, 'disclaimer-text', 15);
+    }, 1500);
+  </script>
 
 </body>
 </html>
