@@ -3,8 +3,7 @@ from PIL import Image
 import pytesseract
 from flask_cors import CORS
 
-# ⚠️ මෙක Termux භාවිතා කරනවා නම් PATH කියන්න ඕනෙ
-pytesseract.pytesseract.tesseract_cmd = '/data/data/com.termux/files/usr/bin/tesseract'
+# ⚠️ අයින් කරලා තියෙන්නෙ Run Termux නම් ඇඩ් කරපන් 
 
 app = Flask(__name__)
 CORS(app)
