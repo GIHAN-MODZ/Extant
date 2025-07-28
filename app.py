@@ -19,7 +19,7 @@ def upload_image():
     image = Image.open(file.stream)
 
     # ⚠️ Sinhala Language OCR
-    extracted_text = pytesseract.image_to_string(image, lang='eng')
+    extracted_text = pytesseract.image_to_string(image, lang='sin+eng')
 
     return jsonify({'extracted_text': extracted_text})
 
